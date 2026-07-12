@@ -41,12 +41,12 @@ async function readCollection<T>(loader: () => Promise<T[]>): Promise<T[]> {
   }
 }
 
-app.get('/api/users', async (_req, res) => {
+app.get(['/api/users', '/api/users/'], async (_req, res) => {
   const users = await readCollection(() => User.find({}).lean());
   res.json({ count: users.length || fallbackData.users.length, items: users.length ? users : fallbackData.users, apiBaseUrl });
 });
 
-app.post('/api/users', async (req, res) => {
+app.post(['/api/users', '/api/users/'], async (req, res) => {
   try {
     const user = await User.create(req.body);
     res.status(201).json({ item: user, apiBaseUrl });
@@ -55,12 +55,12 @@ app.post('/api/users', async (req, res) => {
   }
 });
 
-app.get('/api/teams', async (_req, res) => {
+app.get(['/api/teams', '/api/teams/'], async (_req, res) => {
   const teams = await readCollection(() => Team.find({}).lean());
   res.json({ count: teams.length || fallbackData.teams.length, items: teams.length ? teams : fallbackData.teams, apiBaseUrl });
 });
 
-app.post('/api/teams', async (req, res) => {
+app.post(['/api/teams', '/api/teams/'], async (req, res) => {
   try {
     const team = await Team.create(req.body);
     res.status(201).json({ item: team, apiBaseUrl });
@@ -69,12 +69,12 @@ app.post('/api/teams', async (req, res) => {
   }
 });
 
-app.get('/api/activities', async (_req, res) => {
+app.get(['/api/activities', '/api/activities/'], async (_req, res) => {
   const activities = await readCollection(() => Activity.find({}).lean());
   res.json({ count: activities.length || fallbackData.activities.length, items: activities.length ? activities : fallbackData.activities, apiBaseUrl });
 });
 
-app.post('/api/activities', async (req, res) => {
+app.post(['/api/activities', '/api/activities/'], async (req, res) => {
   try {
     const activity = await Activity.create(req.body);
     res.status(201).json({ item: activity, apiBaseUrl });
@@ -83,12 +83,12 @@ app.post('/api/activities', async (req, res) => {
   }
 });
 
-app.get('/api/leaderboard', async (_req, res) => {
+app.get(['/api/leaderboard', '/api/leaderboard/'], async (_req, res) => {
   const leaderboard = await readCollection(() => Leaderboard.find({}).lean());
   res.json({ count: leaderboard.length || fallbackData.leaderboard.length, items: leaderboard.length ? leaderboard : fallbackData.leaderboard, apiBaseUrl });
 });
 
-app.post('/api/leaderboard', async (req, res) => {
+app.post(['/api/leaderboard', '/api/leaderboard/'], async (req, res) => {
   try {
     const entry = await Leaderboard.create(req.body);
     res.status(201).json({ item: entry, apiBaseUrl });
@@ -97,12 +97,12 @@ app.post('/api/leaderboard', async (req, res) => {
   }
 });
 
-app.get('/api/workouts', async (_req, res) => {
+app.get(['/api/workouts', '/api/workouts/'], async (_req, res) => {
   const workouts = await readCollection(() => Workout.find({}).lean());
   res.json({ count: workouts.length || fallbackData.workouts.length, items: workouts.length ? workouts : fallbackData.workouts, apiBaseUrl });
 });
 
-app.post('/api/workouts', async (req, res) => {
+app.post(['/api/workouts', '/api/workouts/'], async (req, res) => {
   try {
     const workout = await Workout.create(req.body);
     res.status(201).json({ item: workout, apiBaseUrl });

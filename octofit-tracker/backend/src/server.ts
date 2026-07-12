@@ -8,6 +8,7 @@ import { Workout } from './models/workout';
 
 const app = express();
 const port = process.env.PORT || 8000;
+const host = process.env.HOST || '0.0.0.0';
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
 const codespaceName = process.env.CODESPACE_NAME;
 const apiBaseUrl = codespaceName
@@ -111,7 +112,7 @@ app.post('/api/workouts', async (req, res) => {
 });
 
 async function startServer() {
-  app.listen(port, () => {
+  app.listen(Number(port), host, () => {
     console.log(`Backend listening on port ${port}`);
   });
 
